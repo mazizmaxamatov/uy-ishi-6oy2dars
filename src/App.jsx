@@ -1,161 +1,86 @@
 import './App.css';
 import { Fragment } from 'react';
-import { useState } from "react";
-
-
-
-
-
-
+import Greeting from "./companents/Greeting";
+import Box from "./companents/Box";
+import Button from './companents/Button';
+import Card from './companents/Card';
+import List from './companents/List';
+import StatusMessage from './companents/StatusMessage';
+import Modal from './companents/Modal';
+import IconButton from "./companents/IconButton";
 
 
 
 function App() {
-  const isLoggedIn = false;
+  const fruits = ["Apple", "Banana", "Cherry"];
 
 
-
-  const product = {
-    name: 'olma', price: 18.000,
-  }
-
-  const bir = ['Toshkent', 'Samarqand', 'Andijon'];
-  const ab = {
-    color: 'blue',
-    fontSize: '40px'
+  const handleReset = () => {
+    alert("Form Reset!");
   };
-
-  const isAvailable = {}
-
-  const [isSubscribed, setIsSubscribed] = useState(false);
-
-  const [lang, setLang] = useState("uz");
-
-  const greetings = {
-    uz: "Salom!",
-    en: "Hello!",
-    ru: "Привет!"
-  };
-
-  const names = ["Ali", "Bekzod", "Salim", "John", "Muhammad", "Sardor"];
-
-  const filteredNames = names.filter(name => name.length > 5);
-
-
-  const [isActive, setIsActive] = useState(true);
-
-  
-
 
   return (
     <Fragment>
-      <div className='bir w-[200px] h-[150px]'>
-        {"1misol"}
-        <div>{isLoggedIn ? "Xush kelibsiz!" : "Iltimos, tizimga kiring!"}</div>
+      <div className="flex flex-col items-center justify-center h-screen">
+        <Greeting /> {/* Hello, Guest! */}
+        <Greeting name="Shahriyor" /> {/* Hello, Shahriyor! */}
+      </div>
+      <br />
+
+      <div className="flex flex-col items-center justify-center h-screen gap-4">
+        <Box width="200px" height="100px" color="blue" />
+        <Box width="150px" height="150px" color="red" />
+        <Box width="300px" height="80px" color="green" />
+      </div>
+      <br />
+
+      <div className="flex items-center justify-center h-screen">
+        <Button onClick={() => alert("Clicked!")} />
+      </div>
+      <br />
+
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <Card>
+          <h2 className="text-xl font-bold">Title</h2>
+          <p>Some description...</p>
+        </Card>
+      </div>
+      <br />
+
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <h1 className="text-2xl font-bold mb-4">Fruits List</h1>
+        <List items={fruits} />
+      </div>
+      <br />
+
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 space-y-4">
+        <h1 className="text-2xl font-bold">Conditional Rendering Example</h1>
+        <StatusMessage isSuccess={true} /> {/* Success! */}
+        <StatusMessage isSuccess={false} /> {/* Error! */}
+      </div>
+      <br />
+
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <Modal title="Delete Confirmation">
+          <p>Are you sure you want to delete?</p>
+        </Modal>
+      </div>
+      <br />
+
+      <div className="flex flex-col items-center justify-center min-h-screen gap-4">
+        {/* Submit tugmasi */}
+        <IconButton icon="🚀" type="submit" />
+
+        {/* Reset tugmasi */}
+        <IconButton icon="🔄" type="reset" onClick={handleReset} />
       </div>
 
-      <div className='bir w-[200px] h-[150px]'>
-        {"2misol"}
-        <h3>{product.name}</h3>
-        <p>Narxi:{product.price}so`m</p>
-      </div>
-
-
-      <div className='bir w-[200px] h-[150px]'>
-        {"3misol"}
-        {
-          bir.map(function (ikki) {
-            return (
-              <div>{ikki}</div>
-            )
-          })
-        }
-      </div>
-
-
-      <div className='bir w-[200px] h-[150px]'>
-        {"4misol"}
-        <h1>
-          {10 + 10};
-          {10 - 10};
-          {10 * 10};
-          {10 / 10};
-        </h1>
-      </div>
-
-      <div className='bir w-[200px] h-[150px]'>
-        {"5misol"}
-        <h1 style={ab}>salom</h1>
-      </div>
-
-      <div className='bir w-[200px] h-[150px]'>
-        {"6misol"}
-        {isAvailable && <h2>olma</h2>}
-        {isAvailable && <p>sotuvda mavjud</p>}
-      </div>
-
-
-      <div className='bir w-[200px] h-[150px]'>
-        {"7misol"}
-        <button className="px-4 py-2 bg-blue-500 text-white font-bold rounded"
-          onClick={() => setIsSubscribed(!isSubscribed)}>
-          {isSubscribed ? "Obunani bekor qilish" : "Obuna bo‘lish"}
-        </button>
-      </div>
-
-      <div className='bir w-[500px] h-[150px]'>
-        {"8misol"}
-        <div className="p-4 ">
-          <h1 className="text-2xl font-bold">{greetings[lang] || "Hello!"}</h1>
-          <div className="mt-4">
-            <button
-              className="px-3 py-1 mx-2 bg-blue-500 text-white rounded"
-              onClick={() => setLang("uz")}
-            >
-              O'zbekcha
-            </button>
-            <button
-              className="px-3 py-1 mx-2 bg-green-500 text-white rounded"
-              onClick={() => setLang("en")}
-            >
-              English
-            </button>
-            <button
-              className="px-3 py-1 mx-2 bg-red-500 text-white rounded"
-              onClick={() => setLang("ru")}
-            >
-              Русский
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className='bir w-[200px] h-[150px]'>
-          {"9misol"}
-          <div className="p-4">
-      <h2 className="text-xl font-bold mb-2">Uzun ismlar:</h2>
-      <ul className="list-disc list-inside">
-        {filteredNames.map((name, index) => (
-          <li key={index} className="text-lg">{name}</li>
-        ))}
-      </ul>
-    </div>
-      </div>
-
-
-      <div className='bir w-[200px] h-[150px]'>
-        {"11misol"}
-        <button
-          className={`mx-[20px] px-4 py-2 text-white font-bold rounded ${isActive ? "bg-green-500" : "bg-red-500"}`}
-          onClick={() => setIsActive(!isActive)}>
-          {isActive ? "Active" : "Inactive"}
-        </button>
-      </div>
 
 
     </Fragment>
   );
 }
+
 
 
 export default App;
